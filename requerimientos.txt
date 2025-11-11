@@ -1,0 +1,68 @@
+Realiza de manera individual la práctica:
+
+Actividad · Consumir una API REST con manejo de secretos
+Lab 1 · Integración segura de una API REST (consumo de datos)
+Objetivo: consumir clima (OpenWeatherMap) o noticias (NewsAPI) y presentar UI con manejo de errores. Postman, NewsApi
+Entregables:
+Pantalla con datos y estados (cargando/error/vacío).
+.env + lectura con dotenv/ENVied; README con pasos. Dart packages
+Evidencia de pruebas en emulador y dispositivo.
+Criterios técnicos: HTTPS, timeouts, validación de entrada (ciudad), sanitización de texto. OWASP Cheat Sheet
+Dependencias: http, flutter_dotenv o ENVied. docs.flutter.dev, Dark Packages
+Configurar API key en .env y no commitearla.
+Petición GET con http, parseo JSON y manejo de errores (timeouts, 429, etc.).
+Buenas prácticas: retry exponencial, cache defensiva, sanitizar texto mostrado.
+Verificación: probar en emulador y dispositivo.
+Documentación: Flutter “Fetch data from the internet”; OpenWeatherMap API.
+docs.flutter.dev, Postman
+Snippet (resumido):
+final uri = Uri.https('api.openweathermap.org','/data/2.5/weather', {
+  'q': 'Querétaro,MX',
+  'appid': Env.apiKey, // ENVied or dotenv
+  'units': 'metric'
+});
+final resp = await http.get(uri).timeout(const Duration(seconds: 8));
+if (resp.statusCode == 200) { /* parse */ } else { /* handle */ }
+
+Usa herramientas de IA para la generación de interfaces  y código.
+
+
+Obtén todos los personajes
+Puedes acceder a la lista de personajes utilizando el /characterpunto de conexión.
+
+https://rickandmortyapi.com/api/character
+{
+  "info": {
+    "count": 826,
+    "pages": 42,
+    "next": "https://rickandmortyapi.com/api/character/?page=2",
+    "prev": null
+  },
+  "results": [
+    {
+      "id": 1,
+      "name": "Rick Sanchez",
+      "status": "Alive",
+      "species": "Human",
+      "type": "",
+      "gender": "Male",
+      "origin": {
+        "name": "Earth",
+        "url": "https://rickandmortyapi.com/api/location/1"
+      },
+      "location": {
+        "name": "Earth",
+        "url": "https://rickandmortyapi.com/api/location/20"
+      },
+      "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      "episode": [
+        "https://rickandmortyapi.com/api/episode/1",
+        "https://rickandmortyapi.com/api/episode/2",
+        // ...
+      ],
+      "url": "https://rickandmortyapi.com/api/character/1",
+      "created": "2017-11-04T18:48:46.250Z"
+    },
+    // ...
+  ]
+}
